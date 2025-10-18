@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRCA - مؤتمر التوعية بسرطان الثدي</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #d81b60;
+            --primary-color-dark: #c2185b;
+            --secondary-color: #fce4ec;
+            --dark-color: #333;
+            --text-color: #444;
+            --light-gray: #f9f9f9;
+            --white-color: #fff;
+            --shadow: 0 4px 15px rgba(0,0,0,0.07);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--white-color);
+            text-align: right;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 2rem;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+
+        h1 { font-size: 3.5rem; line-height: 1.2; }
+        h2 { font-size: 2.5rem; text-align: center; margin-bottom: 3rem; color: var(--primary-color); }
+        h3 { font-size: 1.8rem; text-align: center; margin-bottom: 2.5rem; margin-top: 3rem; color: var(--dark-color); }
+        p { margin-bottom: 1rem; }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--white-color);
+            padding: 14px 35px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            box-shadow: 0 5px 15px rgba(216, 27, 96, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            background-color: var(--primary-color-dark);
+            box-shadow: 0 8px 20px rgba(216, 27, 96, 0.4);
+        }
+        
+        section {
+            padding: 5rem 0;
+        }
+        
+        /* Header & Navigation */
+        .navbar {
+            background: transparent;
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
+        }
+        
+        .navbar.scrolled {
+            background-color: var(--white-color);
+            box-shadow: var(--shadow);
+            padding: 1rem 0;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar .logo {
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .navbar .logo span {
+            font-family: sans-serif;
+            color: var(--dark-color);
+            margin-left: 5px;
+        }
+
+        .navbar ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        .navbar ul li a {
+            color: var(--dark-color);
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .navbar ul li a:not(.btn)::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            bottom: 0;
+            right: 1rem;
+            transition: width 0.3s ease;
+        }
+
+        .navbar ul li a:hover:not(.btn) { color: var(--primary-color); }
+        .navbar ul li a:hover:not(.btn)::after { width: calc(100% - 2rem); }
+        .navbar ul li a.btn { margin-right: 1rem; padding: 10px 25px; font-size: 1rem; }
+
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(to top right, var(--white-color) 60%, var(--secondary-color));
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+        
+        .hero .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .hero-content {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .hero h1 {
+            font-weight: 800;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+        .hero .subtitle {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-right: auto;
+            margin-left: auto;
+            animation: fadeInUp 0.8s ease-out 0.4s forwards;
+            opacity: 0;
+        }
+        .hero .date {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.8s ease-out 0.6s forwards;
+            opacity: 0;
+        }
+        .hero .btn {
+            animation: fadeInUp 0.8s ease-out 0.8s forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        /* About Section */
+        #about {
+            background: var(--light-gray);
+        }
+        .about-text {
+            max-width: 800px;
+            margin: 0 auto 3rem auto;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+            align-items: center;
+        }
+        
+        .about-card {
+            background: var(--white-color);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .about-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .about-card .icon {
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+        .about-card h4 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+
+        /* Register Section */
+        #register {
+            background: linear-gradient(45deg, var(--primary-color), var(--primary-color-dark));
+            color: var(--white-color);
+            text-align: center;
+        }
+        #register h2 {
+            color: var(--white-color);
+        }
+        #register p {
+            max-width: 600px;
+            margin: 0 auto 2.5rem auto;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        #register .btn {
+            background: var(--white-color);
+            color: var(--primary-color);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        #register .btn:hover {
+            background: var(--secondary-color);
+            color: var(--primary-color-dark);
+            transform: translateY(-3px);
+        }
+
+
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: var(--white-color);
+            text-align: center;
+            padding: 2rem 0;
+        }
+        footer p {
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        /* Responsive Styles */
+        @media(max-width: 992px) {
+            h1 { font-size: 2.8rem; }
+            h2 { font-size: 2.2rem; }
+        }
+
+        @media(max-width: 768px) {
+            body { text-align: center; }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+
+            .navbar .container {
+                flex-direction: row;
+            }
+            .navbar ul {
+                display: none;
+            }
+            
+            .hero {
+                text-align: center;
+                height: auto;
+                padding: 10rem 0 5rem 0;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="navbar" id="navbar">
+        <div class="container">
+            <a href="#hero" class="logo">مؤتمر <span>BRCA</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#hero">الرئيسية</a></li>
+                    <li><a href="#about">عن المؤتمر</a></li>
+                    <li><a href="#register" class="btn">سجل الآن</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>مؤتمر التوعية بسرطان الثدي</h1>
+                    <p class="subtitle">ندعوكم للمشاركة في حدث يهدف إلى نشر الوعي والمعرفة لمكافحة سرطان الثدي في مجتمعنا.</p>
+                    <p class="date"><strong>29 أكتوبر 2025 | مدينة تكريت، العراق</strong></p>
+                    <a href="https://forms.gle/XY3Z8fEaGmHS2Rpf7" target="_blank" class="btn">سجل لحضور المؤتمر</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section-light">
+            <div class="container">
+                <h2>عن المؤتمر</h2>
+                <div class="about-text">
+                    <p>سرطان الثدي هو أكثر أنواع السرطان شيوعًا بين النساء في جميع أنحاء العالم. الكشف المبكر والعلاج الفعال يساهمان بشكل كبير في زيادة معدلات الشفاء. مع ذلك، تواجه العديد من النساء، خاصة في مجتمعنا العراقي، تحديات مثل وصمة العار ونقص المعلومات مما يؤدي إلى تأخر التشخيص.</p>
+                    <p>يهدف هذا المؤتمر خلال شهر "أكتوبر الوردي" إلى توحيد جهود المجتمع ومقدمي الرعاية الصحية والطلاب لتعزيز التثقيف الصحي، وتشجيع الفحص الدوري (مثل الفحص الذاتي وفحص الماموغرام)، وتقديم الدعم للمتأثرين بالمرض. مشاركتكم تساهم في إنقاذ الأرواح.</p>
+                </div>
+
+                <h3>أهدافنا الرئيسية</h3>
+                <div class="about-grid">
+                    <div class="about-card">
+                        <div class="icon">
+                            <svg xmlns="http://www.w.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </div>
+                        <h4>نشر الوعي والمعرفة</h4>
+                        <p>تزويد المجتمع بالمعلومات الدقيقة حول أهمية الكشف المبكر، عوامل الخطر، وطرق الوقاية لتقليل معدلات الإصابة.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="icon">
+                            <svg xmlns="http://www.w.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                        </div>
+                        <h4>تقديم الدعم وكسر الحاجز</h4>
+                        <p>خلق بيئة داعمة تشجع على الحديث المفتوح عن سرطان الثدي، ومكافحة وصمة العار، وتقديم الدعم النفسي للمتأثرين بالمرض.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Registration CTA Section -->
+        <section id="register">
+            <div class="container">
+                <h2>كن جزءًا من التغيير</h2>
+                <p>انضم إلينا في هذا الحدث الهام. حضورك ومشاركتك يساهمان في بناء مجتمع أكثر صحة ووعيًا. المقاعد محدودة، سارع بالتسجيل الآن.</p>
+                <a href="https://forms.gle/XY3Z8fEaGmHS2Rpf7" target="_blank" class="btn">التسجيل مجاني</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 مؤتمر BRCA | مبادرة مجتمعية من أجل مستقبل أكثر صحة.</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for the scrolling header effect
+        const navbar = document.getElementById('navbar');
+        window.onscroll = function() {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        };
+    </script>
+
+</body>
+</html>
